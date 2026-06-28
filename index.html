@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Modern Gate — قريباً</title>
+<meta name="description" content="مودرن جيت — أبواب وبوابات بتصميم عصري. قريباً.">
+<meta name="theme-color" content="#0E0F12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- Open Graph (للمشاركة على واتساب وفيسبوك) -->
+<meta property="og:title" content="Modern Gate — قريباً">
+<meta property="og:description" content="أبواب وبوابات بتصميم عصري. ترقّبوا الافتتاح.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://modern-gate.com">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Manrope:wght@300;400;500;600&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0E0F12;
+    --panel:#15171C;
+    --gold:#C7A45A;
+    --gold-soft:#9c8043;
+    --text:#ECE8DF;
+    --muted:#8C8F97;
+    --line:rgba(199,164,90,.18);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html,body{height:100%}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Tajawal','Manrope',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100dvh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* خطوط عمودية خفيفة = قضبان البوابة */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 72px,
+      rgba(255,255,255,.018) 72px,
+      rgba(255,255,255,.018) 73px
+    );
+    z-index:0;
+  }
+
+  /* توهج ذهبي خفيف فوق */
+  body::after{
+    content:"";
+    position:fixed;
+    top:-30%;
+    left:50%;
+    transform:translateX(-50%);
+    width:120vmax;
+    height:80vmax;
+    background:radial-gradient(ellipse at center, rgba(199,164,90,.10), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .stage{
+    position:relative;
+    z-index:1;
+    min-height:100dvh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:48px 22px;
+    text-align:center;
+  }
+
+  /* ===== العلامة ===== */
+  .brand{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    opacity:0;
+    transform:translateY(14px);
+    animation:rise .9s .55s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .mark{
+    font-family:'Cinzel',serif;
+    direction:ltr;
+    letter-spacing:.22em;
+    font-weight:600;
+    font-size:clamp(1.9rem,6vw,3.4rem);
+    line-height:1;
+    background:linear-gradient(180deg,#f3ecd9,#C7A45A 65%,#8a6f37);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    padding-inline:.1em;
+  }
+  .mark-ar{
+    font-family:'Tajawal',sans-serif;
+    font-weight:300;
+    letter-spacing:.34em;
+    font-size:clamp(.7rem,2.6vw,.95rem);
+    color:var(--muted);
+    padding-inline-start:.34em;
+  }
+
+  /* خط فاصل ذهبي رفيع تحت اللوغو */
+  .rule{
+    width:0;
+    height:1px;
+    margin:22px 0 26px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    animation:expand 1s 1.1s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+
+  .tagline{
+    font-weight:300;
+    font-size:clamp(1rem,3.3vw,1.35rem);
+    color:var(--text);
+    max-width:34ch;
+    margin-bottom:34px;
+    opacity:0;
+    animation:rise .9s .8s ease forwards;
+  }
+  .tagline .en{
+    display:block;
+    direction:ltr;
+    font-family:'Manrope',sans-serif;
+    font-weight:300;
+    letter-spacing:.04em;
+    font-size:.74em;
+    color:var(--muted);
+    margin-top:8px;
+  }
+
+  /* ===== الفيديو ===== */
+  .frame{
+    position:relative;
+    width:min(680px,100%);
+    aspect-ratio:16/9;
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    background:
+      linear-gradient(180deg,#1a1c22,#0f1014);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.8), inset 0 0 0 1px rgba(255,255,255,.02);
+    opacity:0;
+    transform:translateY(20px) scale(.985);
+    animation:rise 1s 1s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .frame::after{ /* إطار ذهبي داخلي ناعم */
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:14px;
+    box-shadow:inset 0 0 60px -20px rgba(199,164,90,.35);
+    pointer-events:none;
+  }
+  .frame video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  /* شاشة بديلة لو الفيديو مو موجود بعد */
+  .placeholder{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    color:var(--muted);
+    font-size:.85rem;
+  }
+  .placeholder .glyph{
+    font-family:'Cinzel',serif;
+    font-size:2rem;
+    color:var(--gold);
+    letter-spacing:.1em;
+  }
+
+  /* زر كتم/تشغيل الصوت */
+  .sound{
+    position:absolute;
+    inset-inline-end:12px;
+    inset-block-end:12px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:rgba(14,15,18,.6);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    color:var(--text);
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:border-color .2s, transform .15s;
+    z-index:3;
+  }
+  .sound:hover{border-color:var(--gold);transform:scale(1.05)}
+  .sound svg{width:18px;height:18px;fill:currentColor}
+
+  /* ===== Coming soon ===== */
+  .soon{
+    margin-top:36px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    opacity:0;
+    animation:rise .9s 1.25s ease forwards;
+  }
+  .soon .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+  .soon .ar{font-size:clamp(1.1rem,4vw,1.5rem);font-weight:500;letter-spacing:.05em}
+  .soon .en{
+    direction:ltr;font-family:'Manrope',sans-serif;font-weight:400;
+    letter-spacing:.42em;font-size:.7rem;color:var(--muted);text-transform:uppercase;
+  }
+
+  /* ===== تواصل ===== */
+  .contact{
+    margin-top:42px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    opacity:0;
+    animation:rise .9s 1.45s ease forwards;
+  }
+  .contact .label{font-size:.8rem;color:var(--muted)}
+  .links{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .links a{
+    display:inline-flex;align-items:center;gap:8px;
+    text-decoration:none;color:var(--text);
+    font-size:.85rem;
+    padding:9px 16px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    transition:border-color .2s,color .2s,background .2s;
+  }
+  .links a:hover{border-color:var(--gold);color:var(--gold);background:rgba(199,164,90,.06)}
+  .links svg{width:15px;height:15px;fill:currentColor}
+
+  footer{
+    position:relative;z-index:1;
+    text-align:center;
+    padding:24px;
+    color:#5c5e66;
+    font-size:.72rem;
+    direction:ltr;
+    letter-spacing:.08em;
+  }
+
+  /* ===== أنيميشن البوابة عند الفتح ===== */
+  .gate{position:fixed;inset:0;z-index:50;pointer-events:none}
+  .gate .leaf{
+    position:absolute;top:0;height:100%;width:50%;
+    background:linear-gradient(180deg,#101115,#0a0b0e);
+    box-shadow:0 0 60px rgba(0,0,0,.7);
+  }
+  .gate .leaf.l{left:0;border-inline-end:1px solid var(--gold);animation:openL 1.5s .15s cubic-bezier(.76,0,.24,1) forwards}
+  .gate .leaf.r{right:0;border-inline-start:1px solid var(--gold);animation:openR 1.5s .15s cubic-bezier(.76,0,.24,1) forwards}
+  .gate .seam{
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:2px;height:100%;
+    background:linear-gradient(180deg,transparent,var(--gold),transparent);
+    box-shadow:0 0 20px var(--gold);
+    animation:seamFade 1.2s .9s ease forwards;
+  }
+
+  @keyframes openL{to{transform:translateX(-100%)}}
+  @keyframes openR{to{transform:translateX(100%)}}
+  @keyframes seamFade{to{opacity:0}}
+  @keyframes rise{to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes expand{to{width:min(120px,40%)}}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001s !important;animation-delay:0s !important}
+    .brand,.tagline,.frame,.soon,.contact{opacity:1;transform:none}
+    .gate{display:none}
+  }
+
+  /* ===== تحسينات الموبايل (iPhone / Android) ===== */
+  @media (max-width:600px){
+    .stage{
+      padding:36px 18px;
+      /* احترام منطقة النوتش بالآيفون */
+      padding-top:max(36px, env(safe-area-inset-top));
+      padding-bottom:max(36px, env(safe-area-inset-bottom));
+    }
+    .rule{margin:16px 0 20px}
+    .tagline{margin-bottom:26px}
+    .frame{border-radius:12px}
+    .soon{margin-top:26px;gap:12px}
+    .contact{margin-top:30px}
+    .links a{font-size:.82rem;padding:11px 16px}  /* أكبر شوي للّمس */
+  }
+
+  /* للشاشات القصيرة جداً بالوضع الأفقي */
+  @media (max-height:520px){
+    .stage{justify-content:flex-start}
+  }
+</style>
+</head>
+<body>
+
+  <!-- البوابة يلي بتنفتح -->
+  <div class="gate" aria-hidden="true">
+    <div class="leaf l"></div>
+    <div class="leaf r"></div>
+    <div class="seam"></div>
+  </div>
+
+  <main class="stage">
+    <div class="brand">
+      <div class="mark">MODERN&nbsp;GATE</div>
+      <div class="mark-ar">مودرن جيت</div>
+    </div>
+
+    <div class="rule"></div>
+
+    <p class="tagline">
+      أبواب وبوابات بتصميم عصري يليق بمدخلك
+      <span class="en">Modern gates &amp; doors, made to fit your entrance</span>
+    </p>
+
+    <!-- ضع فيديو "قريباً" داخل مجلد media باسم intro.mp4 -->
+    <div class="frame">
+      <video id="vid" autoplay muted loop playsinline poster="media/poster.jpg">
+        <source src="media/intro.mp4" type="video/mp4">
+      </video>
+      <div class="placeholder" id="ph">
+        <span class="glyph">⌂</span>
+        <span>أضف الفيديو في media/intro.mp4</span>
+      </div>
+      <button class="sound" id="sound" title="تشغيل الصوت" aria-label="تشغيل الصوت">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/><line x1="20" y1="5" x2="20" y2="5"/></svg>
+      </button>
+    </div>
+
+    <div class="soon">
+      <span class="ar">قريباً</span>
+      <span class="dot"></span>
+      <span class="en">Coming Soon</span>
+    </div>
+
+    <div class="contact">
+      <span class="label">للاستفسار والطلبات المسبقة</span>
+      <div class="links">
+        <a href="mailto:info@modern-gate.com">
+          <svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm2 2v.4l8 5 8-5V6H4zm16 2.5-8 5-8-5V18h16V8.5z"/></svg>
+          info@modern-gate.com
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>© <span id="yr"></span> Modern Gate. All rights reserved.</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // إظهار/إخفاء الشاشة البديلة حسب توفر الفيديو
+  var vid = document.getElementById('vid');
+  var ph  = document.getElementById('ph');
+  var sound = document.getElementById('sound');
+
+  function videoOk(){ ph.style.display = 'none'; }
+  function videoFail(){ ph.style.display = 'flex'; sound.style.display = 'none'; }
+
+  vid.addEventListener('loadeddata', videoOk);
+  vid.addEventListener('error', videoFail);
+  // لو ما في مصدر فعلي
+  if(!vid.querySelector('source').getAttribute('src')) videoFail();
+
+  // زر الصوت
+  var iconOff = '<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 8l5 5m0-5l-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+  var iconOn  = '<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>';
+  sound.innerHTML = iconOff;
+  sound.addEventListener('click', function(){
+    vid.muted = !vid.muted;
+    sound.innerHTML = vid.muted ? iconOff : iconOn;
+    sound.title = vid.muted ? 'تشغيل الصوت' : 'كتم الصوت';
+    if(!vid.muted){ vid.play().catch(function(){}); }
+  });
+</script>
+</body>
+</html>
